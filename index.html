@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sandeep Reddy Rangareddy – Portfolio</title>
+  <meta name="description" content="Business & Data Analyst portfolio – SQL, Power BI, Excel, Python." />
+  
+  <!--
+  HOW TO USE THIS FILE (super simple):
+  1) Create a new public repo named: yourusername.github.io
+  2) Add this file as index.html at the root of the repo.
+  3) Commit → GitHub Pages will publish automatically at https://yourusername.github.io
+  4) Replace all placeholder text (NAME, summary, projects, links) with your info.
+  5) Tip: Add screenshots of your projects into /assets and link them.
+  -->
+
+  <style>
+    :root {
+      --bg: #0f172a;          /* slate-900 */
+      --panel: #111827;       /* gray-900 */
+      --soft: #1f2937;        /* gray-800 */
+      --text: #e5e7eb;        /* gray-200 */
+      --muted: #9ca3af;       /* gray-400 */
+      --brand: #60a5fa;       /* sky-400 */
+      --accent: #34d399;      /* emerald-400 */
+      --card: #0b1220;        /* dark card */
+      --border: #23314d;      /* subtle border */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin:0; padding:0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Layout */
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 80px 0; border-top: 1px solid var(--border); }
+    section:first-of-type { border-top: none; }
+    h1, h2, h3 { line-height: 1.2; margin: 0 0 12px; }
+    h2 { font-size: 1.8rem; }
+    p { color: var(--text); opacity: 0.92; }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; backdrop-filter: blur(12px);
+      background: rgba(15, 23, 42, 0.7); border-bottom: 1px solid var(--border);
+      z-index: 50;
+    }
+    .nav-inner { display:flex; align-items:center; justify-content:space-between; height:64px; }
+    .brand { font-weight:700; letter-spacing:0.4px; }
+    .menu { display:flex; gap: 18px; }
+    .menu a { color: var(--text); opacity: 0.85; font-size: 0.95rem; }
+    .menu a:hover { opacity: 1; }
+    .hamburger { display:none; background:none; border:1px solid var(--border); padding:8px 10px; border-radius:10px; color:var(--text); }
+
+    /* Hero */
+    .hero { display:grid; gap:24px; grid-template-columns: 1.2fr 0.8fr; align-items:center; }
+    .badge { display:inline-block; padding:6px 10px; border:1px solid var(--border); border-radius:999px; color:var(--muted); font-size:0.85rem; }
+    .hero h1 { font-size:2.2rem; margin-top:6px; }
+    .hero p { color: var(--muted); }
+    .cta { display:flex; gap:12px; margin-top: 16px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:600; border:1px solid var(--border); }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), #7dd3fc); color:#0a0f1c; border:none; }
+    .btn.ghost { background: transparent; color: var(--text); }
+
+    .avatar-card { background: linear-gradient(180deg, var(--card), var(--soft)); border:1px solid var(--border); border-radius:16px; padding:16px; text-align:center; }
+    .avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border:2px solid var(--border); }
+
+    /* Section blocks */
+    .grid-2 { display:grid; gap:24px; grid-template-columns: 1fr 1fr; }
+    .grid-3 { display:grid; gap:24px; grid-template-columns: repeat(3, 1fr); }
+
+    .card { background: linear-gradient(180deg, var(--card), var(--soft)); border: 1px solid var(--border); border-radius: 16px; padding: 18px; }
+    .card h3 { margin-bottom: 6px; }
+    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 6px; }
+    .pill { display:inline-block; padding:6px 10px; border:1px solid var(--border); border-radius:999px; color:var(--muted); font-size:0.85rem; margin: 4px 6px 0 0; }
+
+    .proj-img { width:100%; height:180px; background:#0a0f1c; border:1px dashed var(--border); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--muted); margin-bottom:10px; }
+
+    .skills { display:flex; flex-wrap:wrap; gap:10px; }
+
+    /* Footer */
+    footer { padding: 40px 0; color: var(--muted); text-align:center; border-top: 1px solid var(--border); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .menu { display:none; }
+      .hamburger { display:block; }
+      .menu.open { display:flex; flex-direction:column; position:absolute; top:64px; right:20px; background: var(--panel); border:1px solid var(--border); border-radius:12px; padding:12px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Sandeep Reddy Rangareddy</div>
+      <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">☰</button>
+      <div id="menu" class="menu">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="container" style="padding: 60px 0 30px;">
+    <div class="hero">
+      <div>
+        <span class="badge">Business & Data Analyst</span>
+        <h1>Hi, I'm <strong>Sandeep</strong> — I turn messy data into clear decisions.</h1>
+        <p>MS in Information Systems. I build SQL pipelines, clean data with Python, and design insights in Power BI/Excel.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">See Projects →</a>
+          <a class="btn ghost" href="https://linkedin.com/in/your-link" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn ghost" href="https://github.com/your-link" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div>
+        <div class="avatar-card">
+          <!-- Replace src with your photo -->
+          <img class="avatar" src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Your photo" />
+          <p class="meta" style="margin-top: 8px;">Murfreesboro, TN • Open to relocate</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h2>About</h2>
+      <p>
+        I’ve worked across research, support, and analytics — from automating data collection to building dashboards for
+        decision‑makers. My recent work includes a JD Power correlation study, an Excel inventory system, and a modern SQL
+        warehouse (Medallion architecture). I like clean data, fast queries, and clear visuals.
+      </p>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <h2>Skills</h2>
+      <div class="skills">
+        <span class="pill">SQL Server</span>
+        <span class="pill">Python (Pandas, NumPy)</span>
+        <span class="pill">Power BI</span>
+        <span class="pill">Excel (Power Query, VBA)</span>
+        <span class="pill">Access</span>
+        <span class="pill">Tableau</span>
+        <span class="pill">ETL / SSIS</span>
+        <span class="pill">GitHub</span>
+        <span class="pill">MongoDB</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <h2>Featured Projects</h2>
+      <div class="grid-3" style="margin-top: 16px;">
+        <!-- Project 1 -->
+        <article class="card">
+          <div class="proj-img">Add screenshot 1200×700</div>
+          <h3>JD Power Correlation Study</h3>
+          <div class="meta">Python • Pandas • Visualization</div>
+          <p>Analyzed relationships between utility performance dimensions and Overall Satisfaction; produced insights for leadership decisions.</p>
+          <p><a href="#" target="_blank" rel="noopener">View code</a> · <a href="#" target="_blank" rel="noopener">Read case study</a></p>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="card">
+          <div class="proj-img">Add screenshot 1200×700</div>
+          <h3>Power BI – Profit & KPI Dashboard</h3>
+          <div class="meta">Power BI • DAX • Modeling</div>
+          <p>Interactive dashboard with drill‑downs, trend analysis, and KPI targets for leadership visibility across regions.</p>
+          <p><a href="#" target="_blank" rel="noopener">Live dashboard</a> · <a href="#" target="_blank" rel="noopener">Repo</a></p>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="card">
+          <div class="proj-img">Add screenshot 1200×700</div>
+          <h3>SQL – Sales Insights</h3>
+          <div class="meta">SQL Server • Window Functions</div>
+          <p>Built reusable views and queries to uncover revenue trends, seasonality, and top customer segments.</p>
+          <p><a href="#" target="_blank" rel="noopener">Queries</a> · <a href="#" target="_blank" rel="noopener">Readme</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <h2>Experience</h2>
+      <div class="grid-2" style="margin-top: 12px;">
+        <div class="card">
+          <h3>Graduate Assistant – Data Analyst</h3>
+          <div class="meta">MTSU • 2024–2025</div>
+          <ul>
+            <li>Automated research data collection (Python) and built dashboards for reporting.</li>
+            <li>Consolidated datasets in Access; cleaned, joined, and validated records.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Technical Support Analyst</h3>
+          <div class="meta">Eduthrill • 2022–2023</div>
+          <ul>
+            <li>Resolved 500+ issues; documented fixes; escalated complex bugs via Jira.</li>
+            <li>Created operational dashboards; improved clarity for non‑technical users.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact</h2>
+      <p>Let’s connect! I’m open to Data/Business Analyst roles.</p>
+      <p>
+        <strong>Email:</strong> <a href="mailto:sandeepreddyrangareddy@gmail.com">sandeepreddyrangareddy@gmail.com</a><br/>
+        <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener">linkedin.com/in/your-link</a><br/>
+        <strong>GitHub:</strong> <a href="https://github.com/your-link" target="_blank" rel="noopener">github.com/your-link</a>
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Sandeep Reddy Rangareddy</div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    function toggleMenu(){
+      const m = document.getElementById('menu');
+      m.classList.toggle('open');
+    }
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // Smooth scroll for in‑page links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if(id.length > 1){
+          e.preventDefault();
+          document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', id);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
 
