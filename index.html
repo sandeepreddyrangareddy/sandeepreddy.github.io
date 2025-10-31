@@ -288,6 +288,14 @@ section {
   padding-bottom: 180px;  /* ensures scroll spy detects it */
 }
 
+    .menu a.active {
+  background: var(--brand);
+  color: #0a0f1c;
+  border-radius: 999px;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+}
+
 
   </style>
 </head>
@@ -629,6 +637,24 @@ section {
       }
     });
   });
+</script>
+<script>
+  // Highlight current section in navbar (scroll spy)
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.menu a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector(`.menu a[href="#${id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3 }); // triggers earlier (fix for short sections)
+
+  sections.forEach(section => observer.observe(section));
 </script>
 
 
