@@ -8,16 +8,16 @@
 
   <style>
       :root {
-  --bg: #ffffff;           /* white background */
-  --panel: #f9fafb;        /* very light gray panels */
-  --soft: #f3f4f6;         /* slightly darker gray */
-  --text: #111827;         /* dark text */
-  --muted: #4b5563;        /* muted gray text */
-  --brand: #2563eb;        /* blue accent */
-  --accent: #059669;       /* green accent */
-  --card: #ffffff;         /* white cards */
-  --border: #e5e7eb;       /* light border */
-    }
+  --bg: #0f172a;
+  --panel: #111827;
+  --soft: #1f2937;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --brand: #60a5fa;
+  --accent: #34d399;
+  --card: #0b1220;
+  --border: #23314d;
+}
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
@@ -75,6 +75,57 @@
     .edu-card{background:linear-gradient(180deg,var(--card),var(--soft));border:1px solid var(--border);border-radius:16px;padding:14px 16px}
     .edu-date{color:var(--muted);margin-bottom:4px} .edu-title{margin:0 0 4px;font-size:1.1rem} .edu-sub{opacity:.9}
 
+    /* About section layout  */
+.about-wrap {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  align-items: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+.about-photo img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.about-card {
+  background: linear-gradient(180deg, var(--card), var(--soft));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px 26px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+}
+.about-card p { margin-bottom: 14px; }
+.about-card strong { color: var(--brand); }
+.about-card .btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+}
+
+/* Smaller, friendlier text for the hero section */
+.hero h1 { font-size: 1.8rem; line-height: 1.4; }
+.hero p { font-size: 1rem; }
+
+/* Responsive stack for mobile */
+@media (max-width: 900px) {
+  .about-wrap { grid-template-columns: 1fr; }
+  .about-photo { text-align: center; }
+  .about-photo img { max-width: 260px; }
+}
+
+
     /* Footer */
     footer{padding:40px 0;color:var(--muted);text-align:center;border-top:1px solid var(--border)}
 
@@ -121,8 +172,7 @@
   .skill-row{ gap: 6px 14px; }
   .skill-cat{ margin-top: 18px; }
 }
-
-   footer {
+footer {
   padding: 40px 0;
   color: var(--muted);
   text-align: center;
@@ -179,17 +229,32 @@ footer span, footer a {
     </div>
   </header>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <h2>About</h2>
-      <p>
-        I’m a <strong>Data Analytics Professional</strong> who enjoys turning complex data into clear, meaningful insights.
-        I’ve worked across research, analytics, and support—building dashboards, cleaning data, and helping teams make better decisions.
-        I recently completed my M.S. in Information Systems at MTSU and I’m seeking full-time roles in data or business analysis.
-      </p>
+  <!-- ABOUT ME -->
+<section id="about">
+  <div class="container">
+    <h2>ABOUT ME</h2>
+    <div class="about-wrap">
+      <div class="about-photo">
+        <img src="assets/profile.jpg" alt="Sandeep Reddy Rangareddy">
+      </div>
+      <div class="about-card">
+        <p>
+          I’m a <strong>Data Analytics Professional</strong> who enjoys transforming complex data into meaningful insights that help drive better decisions. 
+          I’ve worked across research, analytics, and technical support — building dashboards, cleaning data, and creating reports that guided strategic actions.
+        </p>
+        <p>
+          I recently completed my M.S. in Information Systems at Middle Tennessee State University, where I consolidated datasets, built Power BI dashboards, and streamlined data flows for university program analysis.
+          Previously, at Eduthrill and Accolite Digital, I troubleshot platform issues, supported data integrity, and collaborated closely with cross-functional teams.
+        </p>
+        <p>
+          Outside work, I love learning new tools in data and cloud tech while constantly looking for ways to simplify complex problems.
+        </p>
+        <a href="assets/Sandeep_Reddy_Resume.pdf" class="btn primary" target="_blank">Resume</a>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- EXPERIENCE (Tabbed) -->
   <section id="experience">
@@ -402,9 +467,9 @@ footer span, footer a {
   </section>
 
 <footer>
-  <div class="container">Designed &amp; Built by Sandeep Reddy Rangareddy</div>
+  <div class="container">© <span id="year"></span> Sandeep Reddy Rangareddy</div>
 </footer>
-
+  
   <!-- Scripts -->
   <script>
     function toggleMenu(){ document.getElementById('menu').classList.toggle('open'); }
