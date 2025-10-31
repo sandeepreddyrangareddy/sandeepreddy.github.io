@@ -295,6 +295,16 @@ section {
   padding: 6px 12px;
   transition: all 0.2s ease;
 }
+.menu a.active {
+  background: var(--brand);
+  color: #0a0f1c;
+  border-radius: 999px;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+}
+#contact {
+  padding: 100px 0 180px; /* extra bottom space */
+}
 
 
   </style>
@@ -639,23 +649,27 @@ section {
   });
 </script>
 <script>
-  // Highlight current section in navbar (scroll spy)
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.menu a');
+  // Improved Scroll-Spy: highlights the nav link for the section centered in the viewport
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  const links = Array.from(document.querySelectorAll('.navlink'));
 
-  const observer = new IntersectionObserver(entries => {
+  const spy = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      const id = entry.target.getAttribute('id');
-      const link = document.querySelector(`.menu a[href="#${id}"]`);
-      if (entry.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        if (link) link.classList.add('active');
-      }
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      links.forEach(l =>
+        l.classList.toggle('active', l.getAttribute('href') === '#' + id)
+      );
     });
-  }, { threshold: 0.3 }); // triggers earlier (fix for short sections)
+  }, {
+    root: null,
+    threshold: 0,
+    rootMargin: '-50% 0px -50% 0px'  // triggers when section crosses screen center
+  });
 
-  sections.forEach(section => observer.observe(section));
+  sections.forEach(s => spy.observe(s));
 </script>
+
 
 
 </body>
