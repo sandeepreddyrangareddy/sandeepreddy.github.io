@@ -306,6 +306,19 @@ section {
   padding: 100px 0 180px; /* extra bottom space */
 }
 
+    .navlink.active {
+  background: var(--brand);
+  color: #0a0f1c;
+  border-radius: 999px;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
+}
+
+#contact {
+  padding: 100px 0 200px;
+  min-height: 60vh;
+}
+
 
   </style>
 </head>
@@ -592,83 +605,74 @@ section {
   
   <!-- Scripts -->
   <script>
-    function toggleMenu(){ document.getElementById('menu').classList.toggle('open'); }
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const id=a.getAttribute('href');
-        if(id.length>1){ e.preventDefault(); document.querySelector(id).scrollIntoView({behavior:'smooth',block:'start'}); history.pushState(null,'',id); }
-      });
-    });
+  // --- MOBILE MENU TOGGLE ---
+  function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+  }
 
-    // Tabs behavior for Experience section
-    const tabs=document.querySelectorAll('.exp-tab');
-    const panels=document.querySelectorAll('.exp-panel');
-    tabs.forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        tabs.forEach(b=>b.classList.remove('is-active'));
-        btn.classList.add('is-active');
-        const id=btn.getAttribute('data-target');
-        panels.forEach(p=>{
-          if(p.id===id){ p.hidden=false; p.classList.add('is-active'); }
-          else{ p.hidden=true; p.classList.remove('is-active'); }
-        });
-      });
-    });
-  </script>
- <script>
-  // mobile menu toggle
-  function toggleMenu(){ document.getElementById('menu').classList.toggle('open'); }
+  // --- YEAR IN FOOTER ---
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-  // smooth scroll (keeps your existing behavior if you already had it)
-  document.querySelectorAll('.navlink[href^="#"]').forEach(a=>{
-    a.addEventListener('click', e=>{
-      const id=a.getAttribute('href');
-      if(id.length>1){
+  // --- SMOOTH SCROLL ---
+  document.querySelectorAll('.navlink[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
         e.preventDefault();
         document.getElementById('menu')?.classList.remove('open');
-        document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'});
-        history.pushState(null,'',id);
+        document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.pushState(null, '', id);
       }
     });
   });
 
-  // scroll spy (auto highlight active pill)
-  const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.navlink');
-  window.addEventListener('scroll', ()=>{
-    const y = window.scrollY + 120; // offset for sticky header
-    sections.forEach(sec=>{
-      const top = sec.offsetTop, bottom = top + sec.offsetHeight;
-      if(y >= top && y < bottom){
-        links.forEach(l=>l.classList.remove('active'));
-        const current = document.querySelector(`.navlink[href="#${sec.id}"]`);
-        current && current.classList.add('active');
-      }
+  // --- EXPERIENCE TABS ---
+  const tabs = document.querySelectorAll('.exp-tab');
+  const panels = document.querySelectorAll('.exp-panel');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const id = btn.getAttribute('data-target');
+      panels.forEach(p => {
+        if (p.id === id) {
+          p.hidden = false;
+          p.classList.add('is-active');
+        } else {
+          p.hidden = true;
+          p.classList.remove('is-active');
+        }
+      });
     });
   });
-</script>
-<script>
-  // Improved Scroll-Spy: highlights the nav link for the section centered in the viewport
+
+  // --- SCROLL SPY (highlights active section in nav) ---
   const sections = Array.from(document.querySelectorAll('section[id]'));
   const links = Array.from(document.querySelectorAll('.navlink'));
+  const OFFSET = 120; // Adjust if your header is taller
 
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const id = entry.target.id;
-      links.forEach(l =>
-        l.classList.toggle('active', l.getAttribute('href') === '#' + id)
-      );
+  function setActiveLink() {
+    const y = window.scrollY + OFFSET;
+    let currentId = sections[0]?.id;
+    for (const sec of sections) {
+      const top = sec.offsetTop;
+      const bottom = top + sec.offsetHeight;
+      if (y >= top && y < bottom) {
+        currentId = sec.id;
+        break;
+      }
+    }
+    links.forEach(l => {
+      const match = l.getAttribute('href') === '#' + currentId;
+      l.classList.toggle('active', match);
     });
-  }, {
-    root: null,
-    threshold: 0,
-    rootMargin: '-50% 0px -50% 0px'  // triggers when section crosses screen center
-  });
+  }
 
-  sections.forEach(s => spy.observe(s));
+  window.addEventListener('load', setActiveLink);
+  window.addEventListener('scroll', setActiveLink, { passive: true });
+  window.addEventListener('resize', setActiveLink);
 </script>
+
 
 
 
