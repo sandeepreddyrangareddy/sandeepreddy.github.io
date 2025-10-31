@@ -314,9 +314,22 @@ section {
   transition: all 0.2s ease;
 }
 
+
+}
+    /* So anchors (ABOUT/EXPERIENCE/etc.) stop *below* the sticky header */
+section { scroll-margin-top: 90px; }   /* ~ your nav height */
+
+/* Give the last section enough room at the bottom to scroll */
 #contact {
-  padding: 100px 0 200px;
-  min-height: 60vh;
+  padding: 120px 0 300px;  /* big bottom padding so it can “reach” the top */
+  min-height: 65vh;        /* ensures the section has some height */
+}
+.navlink.active {
+  background: var(--brand);
+  color: #0a0f1c;
+  border-radius: 999px;
+  padding: 6px 12px;
+  transition: all 0.2s ease;
 }
 
 
@@ -604,74 +617,38 @@ section {
 </footer>
   
   <!-- Scripts -->
-  <script>
-  // --- MOBILE MENU TOGGLE ---
-  function toggleMenu() {
-    document.getElementById('menu').classList.toggle('open');
-  }
-
-  // --- YEAR IN FOOTER ---
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // --- SMOOTH SCROLL ---
-  document.querySelectorAll('.navlink[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      if (id.length > 1) {
-        e.preventDefault();
-        document.getElementById('menu')?.classList.remove('open');
-        document.querySelector(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-        history.pushState(null, '', id);
-      }
-    });
-  });
-
-  // --- EXPERIENCE TABS ---
-  const tabs = document.querySelectorAll('.exp-tab');
-  const panels = document.querySelectorAll('.exp-panel');
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabs.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      const id = btn.getAttribute('data-target');
-      panels.forEach(p => {
-        if (p.id === id) {
-          p.hidden = false;
-          p.classList.add('is-active');
-        } else {
-          p.hidden = true;
-          p.classList.remove('is-active');
-        }
-      });
-    });
-  });
-
-  // --- SCROLL SPY (highlights active section in nav) ---
+ <script>
+  // --- SCROLL SPY (robust: picks the last section whose top has passed) ---
+  const navOffset = 90; // match your sticky header height
   const sections = Array.from(document.querySelectorAll('section[id]'));
-  const links = Array.from(document.querySelectorAll('.navlink'));
-  const OFFSET = 120; // Adjust if your header is taller
+  const links    = Array.from(document.querySelectorAll('.navlink'));
 
   function setActiveLink() {
-    const y = window.scrollY + OFFSET;
+    const y = window.scrollY + navOffset + 1;  // +1 avoids boundary jitter
+    // Find the last section whose top is above y
     let currentId = sections[0]?.id;
     for (const sec of sections) {
-      const top = sec.offsetTop;
-      const bottom = top + sec.offsetHeight;
-      if (y >= top && y < bottom) {
-        currentId = sec.id;
-        break;
-      }
+      if (y >= sec.offsetTop) currentId = sec.id;
     }
-    links.forEach(l => {
-      const match = l.getAttribute('href') === '#' + currentId;
-      l.classList.toggle('active', match);
-    });
+
+    // Special case: at the absolute bottom, force last section active
+    const nearBottom =
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 2;
+    if (nearBottom && sections.length) {
+      currentId = sections[sections.length - 1].id;
+    }
+
+    links.forEach(l =>
+      l.classList.toggle('active', l.getAttribute('href') === '#' + currentId)
+    );
   }
 
-  window.addEventListener('load', setActiveLink);
+  window.addEventListener('load',   setActiveLink);
   window.addEventListener('scroll', setActiveLink, { passive: true });
   window.addEventListener('resize', setActiveLink);
 </script>
+
 
 
 
