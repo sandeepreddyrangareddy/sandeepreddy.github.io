@@ -649,6 +649,36 @@ section { scroll-margin-top: 90px; }   /* ~ your nav height */
   window.addEventListener('resize', setActiveLink);
 </script>
 
+<script>
+(() => {
+  // Scope to the Experience section
+  const root   = document.querySelector('#experience');
+  if (!root) return;
+
+  const tabs   = Array.from(root.querySelectorAll('.exp-tab'));
+  const panels = Array.from(root.querySelectorAll('.exp-panel'));
+
+  function openPanel(id) {
+    panels.forEach(p => {
+      const on = p.id === id;
+      p.hidden = !on;
+      p.classList.toggle('is-active', on);
+    });
+    tabs.forEach(t => {
+      const on = t.dataset.target === id;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+    });
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => openPanel(t.dataset.target)));
+
+  // Initialize
+  const initial = tabs.find(t => t.classList.contains('is-active'))?.dataset.target || panels[0]?.id;
+  if (initial) openPanel(initial);
+})();
+</script>
 
 
 
