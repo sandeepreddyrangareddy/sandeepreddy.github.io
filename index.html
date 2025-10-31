@@ -92,7 +92,93 @@
       .hamburger { display:block; }
       .menu.open { display:flex; flex-direction:column; position:absolute; top:64px; right:20px; background: var(--panel); border:1px solid var(--border); border-radius:12px; padding:12px; }
     }
+
+  /* Experience tabs */
+.exp-wrap{display:grid;grid-template-columns:280px 1fr;gap:24px;margin-top:16px}
+.exp-tabs{display:flex;flex-direction:column;border-left:3px solid var(--border)}
+.exp-tab{
+  text-align:left;background:transparent;border:none;padding:12px 14px 12px 16px;
+  color:var(--text);opacity:.85;cursor:pointer;border-bottom:1px solid var(--border);
+  position:relative;outline:none;font-size:1rem
+}
+.exp-tab.is-active{opacity:1;color:var(--text);font-weight:700}
+.exp-tab.is-active::before{
+  content:"";position:absolute;left:-3px;top:0;height:100%;width:3px;background:var(--brand)
+}
+.exp-panels{background:linear-gradient(180deg,var(--card),var(--soft));border:1px solid var(--border);border-radius:16px;padding:20px}
+.exp-panel h3{margin:0 0 4px}
+.exp-panel .at{color:var(--brand);font-weight:700}
+.exp-panel .meta{color:var(--muted);margin-bottom:8px}
+.exp-panel ul{margin:8px 0 0 18px}
+.exp-panel li{margin:6px 0}
+
+@media (max-width:900px){
+  .exp-wrap{grid-template-columns:1fr}
+  .exp-tabs{flex-direction:row;overflow:auto;border-left:none;border-top:3px solid var(--border)}
+  .exp-tab{white-space:nowrap;border-bottom:none;border-right:1px solid var(--border)}
+  .exp-tab.is-active::before{left:0;top:-3px;width:100%;height:3px}
+}
+.role-card{
+  background: linear-gradient(180deg, var(--card), var(--soft));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+}
+.role-card h3{ margin:0 0 4px; }
+.role-card .meta{ color: var(--muted); margin-bottom: 8px; }
+
+/* Education timeline */
+.edu-list { margin-top: 14px; }
+.edu-item {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  column-gap: 16px;
+  position: relative;
+  padding: 14px 0;
+}
+.edu-item::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.edu-item:first-child::before { top: 22px; }
+.edu-item:last-child::before { bottom: 22px; }
+
+.edu-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand);
+  color: #0b1220;
+  border: 1px solid var(--border);
+  margin-top: 8px;
+}
+.edu-card {
+  background: linear-gradient(180deg, var(--card), var(--soft));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+.edu-date { color: var(--muted); margin-bottom: 4px; }
+.edu-title { margin: 0 0 4px; font-size: 1.1rem; }
+.edu-sub { color: var(--text); opacity: .9; }
+.edu-note { color: var(--muted); margin-top: 4px; }
+
+@media (max-width: 900px) {
+  .edu-item { grid-template-columns: 28px 1fr; column-gap: 12px; }
+  .edu-icon { width: 28px; height: 28px; }
+}
+    
   </style>
+  
 </head>
 <body>
   <!-- NAV -->
@@ -101,11 +187,11 @@
       <div class="brand">Sandeep Reddy Rangareddy</div>
       <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">☰</button>
       <div id="menu" class="menu">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
+        <a href="#about">ABOUT</a>
+        <a href="#skills">SKILLS</a>
+        <a href="#projects">PROJECTS</a>
+        <a href="#experience">EXPERIENCE</a>
+        <a href="#contact">CONTACT</a>
       </div>
     </div>
   </nav>
@@ -114,54 +200,158 @@
   <header class="container" style="padding: 60px 0 30px;">
     <div class="hero">
       <div>
-        <span class="badge">Business & Data Analyst</span>
-        <h1>Hi, I'm <strong>Sandeep</strong> — I turn messy data into clear decisions.</h1>
-        <p>MS in Information Systems. I build SQL pipelines, clean data with Python, and design insights in Power BI/Excel.</p>
+        <h1>
+  Hi, I’m <strong>Sandeep Reddy Rangareddy.</strong><br>
+  I enjoy exploring data, solving problems, and creating insights that help people make better decisions.<br>
+  I’m currently looking for full-time opportunities in data and business analysis.
+</h1>
         <div class="cta">
           <a class="btn primary" href="#projects">See Projects →</a>
-          <a class="btn ghost" href="https://linkedin.com/in/your-link" target="_blank" rel="noopener">LinkedIn</a>
-          <a class="btn ghost" href="https://github.com/your-link" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="www.linkedin.com/in/sandeepreddyrangareddy" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn ghost" href="https://github.com/sandeepreddyrangareddy" target="_blank" rel="noopener">GitHub</a>
         </div>
       </div>
       <div>
         <div class="avatar-card">
           <!-- Replace src with your photo -->
-          <img class="avatar" src="https://avatars.githubusercontent.com/u/9919?s=200&v=4" alt="Your photo" />
-          <p class="meta" style="margin-top: 8px;">Murfreesboro, TN • Open to relocate</p>
+          <img class="avatar" src="assets/profile.jpg" alt="Sandeep Reddy Rangareddy" />
         </div>
       </div>
     </div>
   </header>
 
-  <!-- ABOUT -->
+  <!-- ABOUT ME -->
   <section id="about">
     <div class="container">
       <h2>About</h2>
       <p>
-        I’ve worked across research, support, and analytics — from automating data collection to building dashboards for
-        decision‑makers. My recent work includes a JD Power correlation study, an Excel inventory system, and a modern SQL
-        warehouse (Medallion architecture). I like clean data, fast queries, and clear visuals.
-      </p>
+I’m a <strong>Data Analytics Professional</strong> who enjoys turning complex data into clear, meaningful insights.  
+With experience spanning research, analytics, and technical support, I’ve built dashboards, automated data pipelines, and solved real-world business problems across different roles.  
+<br><br>
+I hold a Master’s in Information Systems from Middle Tennessee State University, where I worked as a Graduate Assistant and Research Analyst, organizing large datasets, building reports, and creating dashboards that guided university decisions.  
+Before that, I worked at Eduthrill and Accolite Digital, where I supported data-driven solutions, debugged platform issues, and collaborated with cross-functional teams to improve performance and user experience.  
+<br><br>
+Beyond analytics, I enjoy exploring new tools, learning emerging technologies, and understanding how data drives strategy. I’m currently seeking full-time opportunities in data analytics or business analysis where I can apply my skills and continue learning.
+</p>
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="container">
-      <h2>Skills</h2>
-      <div class="skills">
-        <span class="pill">SQL Server</span>
-        <span class="pill">Python (Pandas, NumPy)</span>
-        <span class="pill">Power BI</span>
-        <span class="pill">Excel (Power Query, VBA)</span>
-        <span class="pill">Access</span>
-        <span class="pill">Tableau</span>
-        <span class="pill">ETL / SSIS</span>
-        <span class="pill">GitHub</span>
-        <span class="pill">MongoDB</span>
+  <!-- EXPERIENCE (Tabbed) -->
+<section id="experience">
+  <div class="container">
+    <h2>WHERE I'VE WORKED</h2>
+
+    <div class="exp-wrap">
+      <!-- Left: companies -->
+      <nav class="exp-tabs" role="tablist" aria-label="Experience Tabs">
+        <button class="exp-tab is-active" role="tab" aria-selected="true"
+                aria-controls="panel-mtsu" data-target="panel-mtsu">
+          MIDDLE TENNESSEE STATE UNIVERSITY
+        </button>
+        <button class="exp-tab" role="tab" aria-selected="false"
+                aria-controls="panel-eduthrill" data-target="panel-eduthrill">
+          EDUTHRILL PVT LTD
+        </button>
+        <button class="exp-tab" role="tab" aria-selected="false"
+                aria-controls="panel-samayan" data-target="panel-samayan">
+          SAMAYAN TECHNOLOGIES
+        </button>
+      </nav>
+
+      <!-- Right: content panels -->
+      <div class="exp-panels">
+        <!-- MTSU shows BOTH roles -->
+        <article id="panel-mtsu" class="exp-panel is-active" role="tabpanel" tabindex="0">
+          <div class="role-card">
+            <h3>Graduate Assistant <span class="at">@ Middle Tennessee State University</span></h3>
+            <div class="meta">Sep 2023 – May 2025</div>
+            <ul>
+              <li>Consolidated and cleaned datasets in Access using SQL joins and validations.</li>
+              <li>Built Excel/Power BI dashboards for outreach and program decisions.</li>
+              <li>Documented workflows; maintained version-controlled data sources.</li>
+              <li>Guided students on statistics (regression, probability, hypothesis testing).</li>
+            </ul>
+          </div>
+
+          <div class="role-card">
+            <h3>Research Analyst <span class="at">@ Middle Tennessee State University</span></h3>
+            <div class="meta">Aug 2025 – Present</div>
+            <ul>
+              <li>Automated web data collection in Python for weekly research updates.</li>
+              <li>Wrangled large CSV/Excel files; produced cleaned datasets and visuals.</li>
+              <li>Presented concise findings to faculty and stakeholders.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Eduthrill -->
+        <article id="panel-eduthrill" class="exp-panel" role="tabpanel" tabindex="0" hidden>
+          <div class="role-card">
+            <h3>Technical Support Analyst <span class="at">@ Eduthrill (Gamified Assessments)</span></h3>
+            <div class="meta">2022 – 2023</div>
+            <ul>
+              <li>Resolved 500+ issues (crashes, blank screens, auto-submissions) via structured triage.</li>
+              <li>Reproduced bugs, checked logs, and escalated via Jira with clear repro steps.</li>
+              <li>Built operational dashboards; explained fixes to non-technical users.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Samayan -->
+        <article id="panel-samayan" class="exp-panel" role="tabpanel" tabindex="0" hidden>
+          <div class="role-card">
+            <h3>Your Role Title <span class="at">@ Samayan Technologies</span></h3>
+            <div class="meta">Dates here</div>
+            <ul>
+              <li>Cleaned data in SQL and Excel to find 10+ qualified leads.</li>
+              <li>Built dashboards to improve product speed and performance.</li>
+              <li>Worked with suppliers and customers to streamline processes.</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+  <!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <h2>EDUCATION</h2>
+
+    <div class="edu-list">
+      <!-- Master’s -->
+      <div class="edu-item">
+        <div class="edu-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 10L12 5 2 10l10 5 6-3v5h2v-6l2-1z" stroke="currentColor" stroke-width="1.5" fill="currentColor" />
+          </svg>
+        </div>
+        <div class="edu-card">
+          <div class="edu-date">Aug 2023 – May 2025</div>
+          <h3 class="edu-title">Middle Tennessee State University, USA</h3>
+          <div class="edu-sub">Master of Science in Information Systems</div>
+          <!-- <div class="edu-note">GPA: 3.76/4.0</div> -->
+        </div>
+      </div>
+
+      <!-- Bachelor’s -->
+      <div class="edu-item">
+        <div class="edu-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 10L12 5 2 10l10 5 6-3v5h2v-6l2-1z" stroke="currentColor" stroke-width="1.5" fill="currentColor" />
+          </svg>
+        </div>
+        <div class="edu-card">
+          <div class="edu-date">2018 – 2022</div>
+          <h3 class="edu-title">Jawaharlal Nehru Technological University, Hyderabad</h3>
+          <div class="edu-sub">Bachelor of Technology in Mechanical Engineering</div>
+          <!-- <div class="edu-note"GPA: 3.0/4.0</div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- PROJECTS -->
   <section id="projects">
@@ -198,31 +388,57 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="container">
-      <h2>Experience</h2>
-      <div class="grid-2" style="margin-top: 12px;">
-        <div class="card">
-          <h3>Graduate Assistant – Data Analyst</h3>
-          <div class="meta">MTSU • 2024–2025</div>
-          <ul>
-            <li>Automated research data collection (Python) and built dashboards for reporting.</li>
-            <li>Consolidated datasets in Access; cleaned, joined, and validated records.</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Technical Support Analyst</h3>
-          <div class="meta">Eduthrill • 2022–2023</div>
-          <ul>
-            <li>Resolved 500+ issues; documented fixes; escalated complex bugs via Jira.</li>
-            <li>Created operational dashboards; improved clarity for non‑technical users.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <h2>Skills</h2>
+    <div class="skills">
 
+      <!-- Core Analytics -->
+      <span class="pill">SQL (SQL Server, MySQL)</span>
+      <span class="pill">Python (Pandas, NumPy, Matplotlib, Seaborn)</span>
+      <span class="pill">Excel (Power Query, PivotTables, VBA)</span>
+      <span class="pill">Power BI (DAX, Power Query, Data Modeling)</span>
+      <span class="pill">Tableau (Dashboard Design)</span>
+
+      <!-- Databases -->
+      <span class="pill">Microsoft Access</span>
+      <span class="pill">MongoDB (Aggregation, Queries)</span>
+      <span class="pill">PostgreSQL</span>
+
+      <!-- Data Engineering / ETL -->
+      <span class="pill">ETL / SSIS</span>
+      <span class="pill">Data Cleaning & Transformation</span>
+      <span class="pill">Data Modeling (Star Schema, Medallion Architecture)</span>
+      <span class="pill">API Data Extraction</span>
+
+      <!-- Statistics & Analysis -->
+      <span class="pill">Descriptive & Inferential Statistics</span>
+      <span class="pill">Correlation & Regression Analysis</span>
+      <span class="pill">Hypothesis Testing</span>
+      <span class="pill">Exploratory Data Analysis (EDA)</span>
+
+      <!-- Visualization & Reporting -->
+      <span class="pill">Dashboard Design & Automation</span>
+      <span class="pill">Storytelling with Data</span>
+      <span class="pill">KPI Design & Metrics Tracking</span>
+
+      <!-- Tools & Platforms -->
+      <span class="pill">GitHub / Version Control</span>
+      <span class="pill">Jira / Agile Tools</span>
+      <span class="pill">Microsoft Fabric</span>
+      <span class="pill">AWS (S3, Glue, Athena)</span>
+
+      <!-- Soft / Professional -->
+      <span class="pill">Problem Solving</span>
+      <span class="pill">Data-Driven Decision Making</span>
+      <span class="pill">Communication & Presentation</span>
+      <span class="pill">Cross-Functional Collaboration</span>
+    </div>
+  </div>
+</section>
+
+ 
   <!-- CONTACT -->
   <section id="contact">
     <div class="container">
@@ -230,8 +446,8 @@
       <p>Let’s connect! I’m open to Data/Business Analyst roles.</p>
       <p>
         <strong>Email:</strong> <a href="mailto:sandeepreddyrangareddy@gmail.com">sandeepreddyrangareddy@gmail.com</a><br/>
-        <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener">linkedin.com/in/your-link</a><br/>
-        <strong>GitHub:</strong> <a href="https://github.com/your-link" target="_blank" rel="noopener">github.com/your-link</a>
+        <strong>LinkedIn:</strong> <a href="www.linkedin.com/in/sandeepreddyrangareddy" target="_blank" rel="noopener">linkedin.com/in/your-link</a><br/>
+        <strong>GitHub:</strong> <a href="https://github.com/sandeepreddyrangareddy" rel="noopener">github.com/your-link</a>
       </p>
     </div>
   </section>
@@ -260,6 +476,43 @@
       });
     });
   </script>
+
+  <script>
+  // Tabs behavior
+  const tabs = document.querySelectorAll('.exp-tab');
+  const panels = document.querySelectorAll('.exp-panel');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // set active tab
+      tabs.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      // show the matching panel
+      const id = btn.getAttribute('data-target');
+      panels.forEach(p => {
+        if (p.id === id) { p.hidden = false; p.classList.add('is-active'); }
+        else { p.hidden = true; p.classList.remove('is-active'); }
+      });
+    });
+  });
+</script>
+  
+<script>
+  const tabs = document.querySelectorAll('.exp-tab');
+  const panels = document.querySelectorAll('.exp-panel');
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      const id = btn.getAttribute('data-target');
+      panels.forEach(p => {
+        if (p.id === id) { p.hidden = false; p.classList.add('is-active'); }
+        else { p.hidden = true; p.classList.remove('is-active'); }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
 
