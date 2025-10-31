@@ -27,57 +27,38 @@
     h1,h2,h3{line-height:1.2;margin:0 0 12px} h2{font-size:1.8rem} p{opacity:.92}
 
   /* Navbar styling (Divyashree style) */
-.navbar {
-  display: flex;
-  justify-content: center;
-  background: #0b1221; /* your dark background */
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+/* --- NAV (single bar with pill highlight) --- */
+.nav{
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(11, 18, 33, 0.85);   /* works on dark theme */
+  border-bottom: 1px solid var(--border);
 }
+.nav-inner{ display:flex; align-items:center; justify-content:space-between; height:64px; }
+.brand{ font-weight:700; letter-spacing:.4px; }
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 1.8rem;
-  margin: 0;
-  padding: 0;
+/* Menu as a UL so pills are easy */
+.menu{ list-style:none; display:flex; gap:1.2rem; margin:0; padding:0; }
+.menu li{ display:block; }
+.menu .navlink{
+  text-decoration:none; text-transform:uppercase;
+  letter-spacing:.5px; font-weight:600;
+  color:#a8b2d1;
+  padding:8px 14px; border-radius:28px;
+  transition:all .25s ease;
 }
+.menu .navlink:hover{ background:rgba(137,115,255,.18); color:#c5b4ff; }
+.menu .navlink.active{ background:#8b5cf6; color:#fff; }
 
-.navbar a {
-  text-decoration: none;
-  color: #a8b2d1;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  padding: 8px 16px;
-  border-radius: 30px;
-  transition: all 0.25s ease;
-}
-
-/* Hover & Active effects */
-.navbar a:hover {
-  background: rgba(155, 135, 245, 0.15);
-  color: #c2a4ff;
-}
-
-.navbar a.active {
-  background: #8b5cf6; /* purple highlight like hers */
-  color: white;
-}
-
-/* Mobile responsive */
-@media (max-width: 800px) {
-  .navbar ul {
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
-  .navbar a {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
+/* Mobile */
+.hamburger{ display:none; background:transparent; border:1px solid var(--border);
+  padding:8px 10px; border-radius:10px; color:var(--text); }
+@media (max-width: 900px){
+  .hamburger{ display:block; }
+  .menu{ display:none; position:absolute; right:20px; top:64px; 
+    background:rgba(11,18,33,.98); border:1px solid var(--border);
+    border-radius:12px; padding:10px; flex-direction:column; gap:.5rem; }
+  .menu.open{ display:flex; }
 }
 
 
@@ -258,20 +239,24 @@ html {
 
 <body>
   <!-- NAV -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <div class="brand">Sandeep Reddy Rangareddy</div>
-      <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">☰</button>
-      <div id="menu" class="menu">
-        <a href="#about">ABOUT</a>
-        <a href="#experience">EXPERIENCE</a>
-        <a href="#education">EDUCATION</a>
-        <a href="#projects">PROJECTS</a>
-        <a href="#skills">SKILLS</a>
-        <a href="#contact">CONTACT</a>
-      </div>
-    </div>
-  </nav>
+  <!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="brand">Sandeep Reddy Rangareddy</div>
+    <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">☰</button>
+
+    <!-- one menu only -->
+    <ul id="menu" class="menu">
+      <li><a class="navlink active" href="#about">ABOUT</a></li>
+      <li><a class="navlink" href="#experience">EXPERIENCE</a></li>
+      <li><a class="navlink" href="#education">EDUCATION</a></li>
+      <li><a class="navlink" href="#projects">PROJECTS</a></li>
+      <li><a class="navlink" href="#skills">SKILLS</a></li>
+      <li><a class="navlink" href="#contact">CONTACT</a></li>
+    </ul>
+  </div>
+</nav>
+
 
   <!-- HERO -->
   <header class="container" style="padding:60px 0 30px;">
@@ -558,26 +543,39 @@ html {
       });
     });
   </script>
-  <script>
-  // Highlight active navbar link while scrolling
-  const sections = document.querySelectorAll("section[id]");
-  const navLinks = document.querySelectorAll(".navbar a");
+ <script>
+  // mobile menu toggle
+  function toggleMenu(){ document.getElementById('menu').classList.toggle('open'); }
 
-  window.addEventListener("scroll", () => {
-    let scrollPos = window.scrollY + 120; // adjust offset for header height
+  // smooth scroll (keeps your existing behavior if you already had it)
+  document.querySelectorAll('.navlink[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id=a.getAttribute('href');
+      if(id.length>1){
+        e.preventDefault();
+        document.getElementById('menu')?.classList.remove('open');
+        document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'});
+        history.pushState(null,'',id);
+      }
+    });
+  });
 
-    sections.forEach(section => {
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-      const id = section.getAttribute("id");
-
-      if (scrollPos >= top && scrollPos < top + height) {
-        navLinks.forEach(link => link.classList.remove("active"));
-        document.querySelector(`.navbar a[href="#${id}"]`)?.classList.add("active");
+  // scroll spy (auto highlight active pill)
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.navlink');
+  window.addEventListener('scroll', ()=>{
+    const y = window.scrollY + 120; // offset for sticky header
+    sections.forEach(sec=>{
+      const top = sec.offsetTop, bottom = top + sec.offsetHeight;
+      if(y >= top && y < bottom){
+        links.forEach(l=>l.classList.remove('active'));
+        const current = document.querySelector(`.navlink[href="#${sec.id}"]`);
+        current && current.classList.add('active');
       }
     });
   });
 </script>
+
 
 </body>
 </html>
