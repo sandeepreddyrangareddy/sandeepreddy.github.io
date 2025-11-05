@@ -332,6 +332,65 @@ section { scroll-margin-top: 90px; }   /* ~ your nav height */
   transition: all 0.2s ease;
 }
 
+    .project {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  transition: transform 0.2s ease;
+}
+.project:hover {
+  transform: translateY(-3px);
+}
+.project h3 {
+  color: var(--brand);
+  margin-bottom: 8px;
+}
+.project ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+    /* TECH STACK */
+.tech-category {
+  margin-bottom: 24px;
+  background: linear-gradient(180deg, var(--card), var(--soft));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  transition: transform 0.2s ease;
+}
+.tech-category:hover {
+  transform: translateY(-3px);
+}
+.tech-category h3 {
+  color: var(--brand);
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+}
+.tech-category p {
+  color: var(--text);
+  opacity: 0.9;
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+footer {
+  padding: 40px 0;
+  color: var(--muted);
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+}
+footer strong {
+  color: var(--brand);
+  font-weight: 600;
+}
 
   </style>
 </head>
@@ -363,8 +422,8 @@ section { scroll-margin-top: 90px; }   /* ~ your nav height */
     <span class="eyebrow">Open to full-time roles · Open to relocate</span>
     <h1>Hi, I’m <strong>Sandeep Reddy Rangareddy</strong>.</h1>
     <p class="sub">
-      I analyze messy data and turn it into clear decisions. I love working with SQL, Power BI,
-      and Python to build tidy datasets, useful dashboards, and simple stories that teams can act on.
+      I design and automate analytics pipelines using SQL, Python, dbt, and Azure Data Factory to transform messy data into analysis-ready models. 
+      I enjoy creating reliable systems and dashboards that make data-driven decisions simple.
     </p>
 
     <div class="cta">
@@ -384,18 +443,18 @@ section { scroll-margin-top: 90px; }   /* ~ your nav height */
         <img src="assets/profile.jpg" alt="Sandeep Reddy Rangareddy">
       </div>
       <div class="about-card">
-        <p>
-          I’m a <strong>Data Analytics Professional</strong> who enjoys transforming complex data into meaningful insights that help drive better decisions. 
-          I’ve worked across research, analytics, and technical support — building dashboards, cleaning data, and creating reports that guided strategic actions.
-        </p>
-        <p>
-          I recently completed my M.S. in Information Systems at Middle Tennessee State University, where I consolidated datasets, built Power BI dashboards, and streamlined data flows for university program analysis.
-          Previously, at Eduthrill and Accolite Digital, I troubleshot platform issues, supported data integrity, and collaborated closely with cross-functional teams.
-        </p>
-        <p>
-          Outside work, I love learning new tools in data and cloud tech while constantly looking for ways to simplify complex problems.
-        </p>
-        <a href="assets/Sandeep_Reddy_Resume.pdf" class="btn primary" target="_blank">Resume</a>
+<p>
+  I’m an <strong>Analytics Engineer</strong> who enjoys building reliable data pipelines and models that turn raw information into meaningful insights. 
+  My work combines analytics, data engineering, and problem-solving — from designing data workflows to creating dashboards that support smarter decisions.
+</p>
+<p>
+  I recently earned my <strong>M.S. in Information Systems</strong> from Middle Tennessee State University, where I built Power BI dashboards, streamlined data flows, and organized university program datasets into centralized databases. 
+  Earlier, at <strong>Eduthrill (Accolite Digital)</strong>, I supported data operations, resolved platform issues, and improved data reliability through analysis and validation.
+</p>
+<p>
+  I’m always learning new tools in cloud and analytics engineering — exploring <strong>dbt</strong>, <strong>Airflow</strong>, <strong>Azure Data Factory</strong>, and <strong>Snowflake</strong> — with a goal to simplify complex data processes and build systems that scale.
+</p>
+        <a href="assets/SandeepReddyRangareddyResume.pdf" class="btn primary" target="_blank">Resume</a>
       </div>
     </div>
   </div>
@@ -501,103 +560,79 @@ section { scroll-margin-top: 90px; }   /* ~ your nav height */
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects">
-    <div class="container">
-      <h2>Featured Projects</h2>
-      <div class="grid-3" style="margin-top:16px;">
-        <article class="card">
-          <div class="proj-img">Add screenshot 1200×700</div>
-          <h3>JD Power Correlation Study</h3>
-          <div class="meta">Python • Pandas • Visualization</div>
-          <p>Analyzed relationships between utility performance dimensions and Overall Satisfaction; produced insights for leadership decisions.</p>
-          <p><a href="#" target="_blank" rel="noopener">View code</a> · <a href="#" target="_blank" rel="noopener">Read case study</a></p>
-        </article>
-        <article class="card">
-          <div class="proj-img">Add screenshot 1200×700</div>
-          <h3>Power BI – Profit & KPI Dashboard</h3>
-          <div class="meta">Power BI • DAX • Modeling</div>
-          <p>Interactive dashboard with drill-downs, trend analysis, and KPI targets for leadership visibility across regions.</p>
-          <p><a href="#" target="_blank" rel="noopener">Live dashboard</a> · <a href="#" target="_blank" rel="noopener">Repo</a></p>
-        </article>
-        <article class="card">
-          <div class="proj-img">Add screenshot 1200×700</div>
-          <h3>SQL – Sales Insights</h3>
-          <div class="meta">SQL Server • Window Functions</div>
-          <p>Built reusable views and queries to uncover revenue trends, seasonality, and top customer segments.</p>
-          <p><a href="#" target="_blank" rel="noopener">Queries</a> · <a href="#" target="_blank" rel="noopener">Readme</a></p>
-        </article>
-      </div>
-    </div>
-  </section>
+<section id="projects">
+  <div class="container">
+    <h2>Projects</h2>
 
-  <!-- SKILLS -->
-  <!-- TECH STACK / SKILLS -->
+    <div class="project">
+      <h3>Modern Data Warehouse & Analytics Pipeline</h3>
+      <ul>
+        <li>Designed an end-to-end data pipeline using <strong>Azure Data Factory</strong> to ingest raw CSV and database data into <strong>Azure Synapse</strong>.</li>
+        <li>Modeled data into <strong>star-schema structures</strong> across Bronze, Silver, and Gold layers using <strong>dbt</strong> and <strong>SQL</strong>, and visualized key metrics in <strong>Power BI dashboards</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <h3>HR Analytics Dashboard</h3>
+      <ul>
+        <li>Designed an interactive <strong>HR dashboard in Tableau</strong> to visualize hiring trends, turnover, and demographics by integrating and cleaning data in Excel prior to visualization.</li>
+        <li>Developed calculated fields and KPIs (<strong>attrition rate, department growth, and diversity ratio</strong>) to highlight workforce insights for leadership decision-making.</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <h3>Marketing Campaign Analytics Pipeline</h3>
+      <ul>
+        <li>Automated data ingestion from multiple marketing sources using <strong>Python</strong> and orchestrated workflows with <strong>Airflow</strong> to load and model data in <strong>Snowflake</strong>.</li>
+        <li>Designed <strong>dbt transformations</strong> and validation tests for campaign-level metrics, visualized insights in <strong>Power BI dashboards</strong> tracking ROI and conversions.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- TECH STACK -->
 <section id="skills">
   <div class="container">
-    <h2>TECH STACK</h2>
+    <h2>💻 Tech Stack</h2>
 
-    <!-- Core -->
-    <h3 class="skill-cat">Core</h3>
-    <div class="skill-row">
-      <span>Business Analytics</span>
-      <span>Data Cleaning</span>
-      <span>Exploratory Data Analysis</span>
-      <span>Statistics</span>
-      <span>Dashboards & Reporting</span>
-      <span>Data Modeling</span>
+    <div class="tech-category">
+      <h3>Core Competencies</h3>
+      <p>Data Modeling • ETL Development • Data Pipelines • Business Analytics • Data Cleaning • Exploratory Data Analysis • Dashboards & Reporting • Data Quality & Testing</p>
     </div>
 
-    <!-- Languages -->
-    <h3 class="skill-cat">Languages</h3>
-    <div class="skill-row">
-      <span>SQL</span>
-      <span>Python</span>
-      <span>DAX</span>
-      <span>R (basic)</span>
+    <div class="tech-category">
+      <h3>Languages</h3>
+      <p>SQL • Python • DAX</p>
     </div>
 
-    <!-- Frameworks & Libraries -->
-    <h3 class="skill-cat">Frameworks & Libraries</h3>
-    <div class="skill-row">
-      <span>Pandas</span>
-      <span>NumPy</span>
-      <span>Matplotlib</span>
-      <span>Seaborn</span>
-      <span>Power Query</span>
-      <span>scikit-learn (basics)</span>
+    <div class="tech-category">
+      <h3>Frameworks & Libraries</h3>
+      <p>dbt • Pandas • NumPy • Power Query • scikit-learn (basics) • Matplotlib • Seaborn</p>
     </div>
 
-    <!-- Databases -->
-    <h3 class="skill-cat">Databases</h3>
-    <div class="skill-row">
-      <span>SQL Server</span>
-      <span>PostgreSQL</span>
-      <span>MySQL</span>
-      <span>Microsoft Access</span>
-      <span>MongoDB</span>
+    <div class="tech-category">
+      <h3>Databases & Warehousing</h3>
+      <p>Azure Synapse • Snowflake • SQL Server • PostgreSQL • MySQL • Microsoft Access • MongoDB</p>
     </div>
 
-    <!-- Cloud & DevOps -->
-    <h3 class="skill-cat">Cloud &amp; DevOps</h3>
-    <div class="skill-row">
-      <span>Microsoft Fabric</span>
-      <span>AWS S3</span>
-      <span>AWS Athena</span>
-      <span>AWS Glue</span>
-      <span>Git &amp; GitHub</span>
+    <div class="tech-category">
+      <h3>Cloud & Orchestration</h3>
+      <p>Azure Data Factory • Airflow • AWS S3 • AWS Athena • AWS Glue • Microsoft Fabric</p>
     </div>
 
-    <!-- Tools -->
-    <h3 class="skill-cat">Tools</h3>
-    <div class="skill-row">
-      <span>Power BI</span>
-      <span>Tableau</span>
-      <span>Excel (PivotTables, VBA)</span>
-      <span>Jira</span>
-      <span>VS Code</span>
+    <div class="tech-category">
+      <h3>Version Control & DevOps</h3>
+      <p>Git • GitHub</p>
+    </div>
+
+    <div class="tech-category">
+      <h3>Tools & Visualization</h3>
+      <p>Power BI • Tableau • Excel (PivotTables, Power Query) • VS Code • Jira</p>
     </div>
   </div>
 </section>
+
 
   <!-- CONTACT -->
   <section id="contact">
@@ -613,8 +648,11 @@ section { scroll-margin-top: 90px; }   /* ~ your nav height */
   </section>
 
 <footer>
-  <div class="container">© <span id="year"></span> Sandeep Reddy Rangareddy</div>
+  <div class="container">
+    Designed & Built by <strong>Sandeep Reddy Rangareddy</strong> • © <span id="year"></span>
+  </div>
 </footer>
+
   
   <!-- Scripts -->
  <script>
