@@ -332,26 +332,28 @@ section { scroll-margin-top: 90px; }   /* ~ your nav height */
   transition: all 0.2s ease;
 }
 
-    .project {
-  background: rgba(255, 255, 255, 0.02);
+   .project-box {
+  background: linear-gradient(180deg, var(--card), var(--soft));
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px 24px;
+  border-radius: 14px;
+  padding: 24px;
   margin-bottom: 24px;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.project:hover {
-  transform: translateY(-3px);
+.project-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(96,165,250,0.15);
 }
-.project h3 {
+.project-box h3 {
   color: var(--brand);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  font-size: 1.15rem;
 }
-.project ul {
+.project-box ul {
   margin: 0;
   padding-left: 20px;
   color: var(--text);
-  opacity: 0.9;
+  line-height: 1.6;
 }
 
     /* TECH STACK */
@@ -560,11 +562,12 @@ footer strong {
   </section>
 
   <!-- PROJECTS -->
+<!-- PROJECTS -->
 <section id="projects">
   <div class="container">
     <h2>Projects</h2>
 
-    <div class="project">
+    <div class="project-box">
       <h3>Modern Data Warehouse & Analytics Pipeline</h3>
       <ul>
         <li>Designed an end-to-end data pipeline using <strong>Azure Data Factory</strong> to ingest raw CSV and database data into <strong>Azure Synapse</strong>.</li>
@@ -572,7 +575,7 @@ footer strong {
       </ul>
     </div>
 
-    <div class="project">
+    <div class="project-box">
       <h3>HR Analytics Dashboard</h3>
       <ul>
         <li>Designed an interactive <strong>HR dashboard in Tableau</strong> to visualize hiring trends, turnover, and demographics by integrating and cleaning data in Excel prior to visualization.</li>
@@ -580,7 +583,7 @@ footer strong {
       </ul>
     </div>
 
-    <div class="project">
+    <div class="project-box">
       <h3>Marketing Campaign Analytics Pipeline</h3>
       <ul>
         <li>Automated data ingestion from multiple marketing sources using <strong>Python</strong> and orchestrated workflows with <strong>Airflow</strong> to load and model data in <strong>Snowflake</strong>.</li>
@@ -589,6 +592,8 @@ footer strong {
     </div>
 
   </div>
+</section>
+
 </section>
 
 <!-- TECH STACK -->
@@ -638,7 +643,7 @@ footer strong {
   <section id="contact">
     <div class="container">
       <h2>Contact</h2>
-      <p>Let’s connect! I’m open to Data/Business Analyst roles.</p>
+      <p>Let’s connect! I’m open to Analytics Engineer roles.</p>
       <p>
         <strong>Email:</strong> <a href="mailto:sandeepreddyrangareddy@gmail.com">sandeepreddyrangareddy@gmail.com</a><br/>
         <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/sandeepreddyrangareddy" target="_blank" rel="noopener">linkedin.com/in/sandeepreddyrangareddy</a><br/>
